@@ -1,0 +1,21 @@
+describe('Verify add to cart functionality', () => {
+  beforeEach(() => {
+    cy.visit('')
+  })
+  it('Add a product to cart', () => {
+    cy.get('#user-name').type('standard_user')
+    cy.get('[data-test="password"]').type('secret_sauce')
+    cy.get('[data-test="login-button"]').click()
+    cy.get('.app_logo').should('be.visible')
+    cy.get('[data-test="title"]').should('have.text','Products')
+    cy.url().should('include','inventory')
+    cy.get('[data-test="add-to-cart-sauce-labs-backpack"]').click()
+    cy.get('[data-test="shopping-cart-link"]').click()
+    cy.get('#checkout').click()
+    cy.url().should('include','checkout')
+    cy.get('#first-name').type('sanbercode')
+    cy.get('#last-name').type('bootcamp')
+    cy.get('#postal-code').type('53647')
+    cy.get('#continue')
+  })
+})
